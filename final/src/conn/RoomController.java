@@ -6,6 +6,7 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import conn.RequestMapping.RequestMethod;
+import dao.InterestDao;
 import dao.LogonDao;
 import dao.RoomDao;
+import model.InterestDataBean;
 import model.LogonDataBean;
 import model.RoomDataBean;
 import conn.RequestMapping;
@@ -43,8 +46,11 @@ public class RoomController extends ActionAnnotation {
 		
 		LogonDao service = LogonDao.getInstance();
 		LogonDataBean member = service.getUser((String)session.getAttribute("memEmail"));
+		InterestDao Inservice = InterestDao.getInstance();
+		List<InterestDataBean> li = Inservice.allgetTit();
 		
 		request.setAttribute("name", member.getName());
+		request.setAttribute("li", li);
 		
 		return "/view/content/room/roomWriteForm.jsp";
 	}

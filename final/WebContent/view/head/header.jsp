@@ -44,6 +44,7 @@
 						<ul class = "sub-menu">
 							<li><a href = "${pageContext.request.contextPath}/member/logoutPro">로그아웃</a></li>
 							<li><a href = "#">마이페이지</a></li>
+							<li><a href = "${pageContext.request.contextPath}/room/roomWriteForm">모임 등록</a></li>
 						</ul>
 					</li>
 					</c:if>

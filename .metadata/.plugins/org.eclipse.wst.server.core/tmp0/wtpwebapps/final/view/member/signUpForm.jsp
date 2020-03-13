@@ -44,7 +44,6 @@ function jusoCallBack(roadFullAddr){
 	// 주소
 	var address = $('#userAddr');
 	
-	alert("정규식 로드");
 	
 	$(document).ready(function() {
 		var overlap = 0;

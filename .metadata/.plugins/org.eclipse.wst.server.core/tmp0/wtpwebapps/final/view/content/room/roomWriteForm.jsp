@@ -22,6 +22,24 @@
 		} else if (e.value == 3) {
 			d = good_c;
 			target.style.display = "inline-block";
+		}else if (e.value == 4) {
+			d = good_c;
+			target.style.display = "inline-block";
+		}else if (e.value == 5) {
+			d = good_c;
+			target.style.display = "inline-block";
+		}else if (e.value == 6) {
+			d = good_c;
+			target.style.display = "inline-block";
+		}else if (e.value == 7) {
+			d = good_c;
+			target.style.display = "inline-block";
+		}else if (e.value == 8) {
+			d = good_c;
+			target.style.display = "inline-block";
+		}else if (e.value == 9) {
+			d = good_c;
+			target.style.display = "inline-block";
 		} else {
 			target.style.display = "none";
 		}
@@ -56,12 +74,12 @@
 			<tr>
 				<td><select onchange="list(this)" name="like_ca">
 						<option>대분류</option>
-						<%-- 						<c:forEach var="li" items="${li }" varStatus="index"> --%>
-						<%-- 							<option value="${index.index}" id="">${li. }</option> --%>
-						<%-- 						</c:forEach> --%>
-						<option value="1">대분류1</option>
-						<option value="2">대분류2</option>
-						<option value="3">대분류3</option>
+								<c:forEach var="li" items="${li }" varStatus="index">
+									<option value="${index.index}" id="">${li.interestName }</option>
+								</c:forEach>
+<!-- 						<option value="1">대분류1</option> -->
+<!-- 						<option value="2">대분류2</option> -->
+<!-- 						<option value="3">대분류3</option> -->
 
 
 				</select> <select id="small" name="like_sub" style="display: none">
