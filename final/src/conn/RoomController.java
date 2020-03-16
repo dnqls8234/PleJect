@@ -99,6 +99,35 @@ public class RoomController extends ActionAnnotation {
 		}
 		
 		
-		return "/view/content/room/roomWriteForm.jsp";
+		return "redirect:/room/roomList";
+	}
+	
+	
+	@RequestMapping(value = "roomList", method = RequestMethod.GET)
+	public String Room_List(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		RoomDao service = RoomDao.getInstance();
+		List<RoomDataBean> member = service.getRoomList();
+//		InterestDao Inservice = InterestDao.getInstance();
+//		List<InterestDataBean> li = Inservice.allgetTit();
+		
+		request.setAttribute("li", member);
+		
+		return "/view/content/room/roomlist.jsp";
+	}
+	
+	@RequestMapping(value = "roomcontent", method = RequestMethod.GET)
+	public String Room_Content(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		RoomDao service = RoomDao.getInstance();
+		RoomDataBean room = service.getRoom(Integer.parseInt(request.getParameter("num")));
+//		InterestDao Inservice = InterestDao.getInstance();
+//		List<InterestDataBean> li = Inservice.allgetTit();
+		
+		request.setAttribute("room", room);
+		
+		return "/view/content/room/roomcontent.jsp";
 	}
 }

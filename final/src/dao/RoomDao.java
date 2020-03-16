@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import model.RoomDataBean;
 import oracle.net.aso.p;
@@ -84,4 +86,102 @@ public class RoomDao {
 		}
 
 	}
+
+	public List<RoomDataBean> getRoomList() {
+		Connection conn = null;
+		List<RoomDataBean> rList = new ArrayList<RoomDataBean>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select * from hobbyclass");
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				while (rs.next()) {
+
+					RoomDataBean roomset = new RoomDataBean();
+					roomset.setContent(rs.getString("content"));
+					roomset.setHost(rs.getString("host"));
+					roomset.setLike_ca(rs.getInt("like_ca"));
+					roomset.setLike_sub(rs.getInt("like_sub"));
+					roomset.setLocation(rs.getString("location"));
+					roomset.setMeet_title(rs.getString("meet_title"));
+					roomset.setMembercnt(rs.getInt("membercnt"));
+					roomset.setNum(rs.getInt("num"));
+					roomset.setPhoto(rs.getString("photo"));
+					System.out.println(roomset);
+					rList.add(roomset);
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (rs != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return rList;
+	}
+
+	public RoomDataBean getRoom(int num) {
+		RoomDataBean room = new RoomDataBean();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select * from hobbyclass where num=?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				room.setPhoto(rs.getString("photo"));
+				room.setMeet_title(rs.getString("meet_title"));
+				room.setContent(rs.getString("content"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (rs != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return room;
+	}
+
 }

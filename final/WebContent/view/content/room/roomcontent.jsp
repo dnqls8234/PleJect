@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<img src="<%= request.getContextPath()%>/uploadFile/${li.photo}">
-<h3>${li.meet_title }</h3>
+<img src="<%= request.getContextPath()%>/uploadFile/${room.photo}">
+<h3>${room.meet_title }</h3>
 <p>
-	${li.content }
+	${room.content }
 </p>
 
 <div>
@@ -24,6 +24,13 @@
 	
 	</c:forEach>
 </div>
-<button>가입하기</button>
+<button onclick="check()">가입하기</button>
+<script>
+	function check() {
+		alert("가입이 완료되었습니다.")
+		
+	}
+
+</script>
 </body>
 </html>
