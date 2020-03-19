@@ -1,0 +1,30 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class MypageDao {
+
+		private static MypageDao instance = new MypageDao();
+
+		public static MypageDao getMypageDao() {
+			return instance;
+		}
+
+		private MypageDao() {
+		}
+
+		private Connection getConnection() throws Exception {
+			Connection conn = null;
+			try {
+				String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
+				String dbId = "users";
+				String dbPass = "1111";
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return conn;
+		}
+}

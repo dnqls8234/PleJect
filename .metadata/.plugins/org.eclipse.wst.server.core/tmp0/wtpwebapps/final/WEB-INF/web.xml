@@ -48,6 +48,15 @@
     <url-pattern>/room/*</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>MypageController</servlet-name>
+    <servlet-class>conn.MypageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MypageController</servlet-name>
+    <url-pattern>/mypage/*</url-pattern>
+  </servlet-mapping>
+  
  
   
 </web-app>

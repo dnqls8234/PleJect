@@ -52,6 +52,7 @@ public class MemberController extends ActionAnnotation {
 		if (check == 1) {
 			String name = manager.findName(memEmail);
 			session.setAttribute("name", name);
+			session.setAttribute("memEmail", memEmail);
 		}
 		request.setAttribute("check", check);
 		
@@ -62,7 +63,7 @@ public class MemberController extends ActionAnnotation {
 	public String member_logoutPro(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
-		session.removeAttribute("name");
+		session.invalidate();
 
 		return "/view/member/logoutForm.jsp";
 	}
@@ -90,6 +91,7 @@ public class MemberController extends ActionAnnotation {
 		
 		manager.insertMember(member);
 		session.setAttribute("name", member.getName());
+		session.setAttribute("memEmail", member.getEmail());
 		
 		InterestDao service = InterestDao.getInstance();
 		List<InterestDataBean> interestList = service.allgetTit();

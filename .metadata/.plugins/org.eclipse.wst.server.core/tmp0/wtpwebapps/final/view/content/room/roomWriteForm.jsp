@@ -69,7 +69,8 @@
 </head>
 <body>
 	<form action="roomWritePro" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="host" value="${name }">
+		<input type="hidden" name="host" value="${member.name }">
+		<input type="hidden" name="email" value="${member.email}">
 		<table>
 			<tr>
 				<td><select onchange="list(this)" name="like_ca">

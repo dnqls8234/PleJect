@@ -1,0 +1,53 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import model.MyPageDataBean;
+
+public class MypageDao {
+
+		private static MypageDao instance = new MypageDao();
+
+		public static MypageDao getInstance() {
+			return instance;
+		}
+
+		private MypageDao() {
+		}
+
+		private Connection getConnection() throws Exception {
+			Connection conn = null;
+			try {
+				String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
+				String dbId = "users";
+				String dbPass = "1111";
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return conn;
+		}
+		
+		public List<MyPageDataBean> getMyRoomList() {
+			Connection conn = null;
+			PreparedStatement ps = null;
+			ResultSet rs =  null;
+		
+			try{
+				conn = getConnection();
+				
+				
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		
+		}
+}

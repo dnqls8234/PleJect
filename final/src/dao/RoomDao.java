@@ -158,6 +158,11 @@ public class RoomDao {
 				room.setPhoto(rs.getString("photo"));
 				room.setMeet_title(rs.getString("meet_title"));
 				room.setContent(rs.getString("content"));
+				room.setLike_ca(rs.getInt("like_ca"));
+				room.setNum(rs.getInt("num"));
+				room.setMembercnt(rs.getInt("membercnt"));
+			
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,6 +187,139 @@ public class RoomDao {
 			}
 		}
 		return room;
+	}
+
+	public void RoomJoin(RoomDataBean Bean, String email, int i) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int number = 0;
+		try {
+			conn = getConnection();
+			
+			if(Bean.getNum()==0){
+			pstmt = conn.prepareStatement("select nvl(max(num)+1,1) from hobbyclass");
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				number = rs.getInt(1);
+			}
+			}
+			pstmt = conn.prepareStatement("select * from member where email=?");
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+					
+
+			pstmt = conn.prepareStatement("insert into classjoin values(?,?,?,?,?,?,?,?,?,sysdate)");
+			pstmt.setInt(1, Bean.getLike_ca());
+			pstmt.setString(2, Bean.getMeet_title());
+			pstmt.setString(3, email);
+			pstmt.setString(4, rs.getString("gender"));
+			pstmt.setString(5, rs.getString("name"));
+			pstmt.setString(6, rs.getString("birthday"));
+			pstmt.setInt(7, Bean.getNum());
+			pstmt.setInt(8, Bean.getMembercnt());
+			pstmt.setInt(9, i);
+
+			pstmt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+
+		}
+
+		
+	}
+
+	public int check(int num, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int check = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt =  conn.prepareStatement("select * from classjoin where email=? and classnum=?");
+			pstmt.setString(1, email);
+			pstmt.setInt(2, num);
+			check = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+
+		}
+		
+		
+		return check;
+	}
+
+	public void RoomOut(String email, int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt =  conn.prepareStatement("delete classjoin where email=? and classnum=?");
+			pstmt.setString(1, email);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+
+		}
+		
+		
 	}
 
 }

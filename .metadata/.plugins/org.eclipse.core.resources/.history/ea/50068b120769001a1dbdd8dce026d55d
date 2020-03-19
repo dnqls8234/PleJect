@@ -1,0 +1,17 @@
+package model;
+
+import java.sql.Timestamp;
+
+public class MyPageDataBean {
+
+	private int like_ca;
+	private String meet_title;
+	private String email;
+	private String gender;
+	private String name;
+	private int classnum; 
+	private String birthday;
+	private int membercnt;
+	private int status;
+	private Timestamp regi_date;
+}
