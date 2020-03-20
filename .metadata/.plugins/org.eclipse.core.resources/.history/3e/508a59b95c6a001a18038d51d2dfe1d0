@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Interest">
+<cache />
+
+<select id="allgetTit" resultType="Interest">
+select interestName from interest
+</select>
+
+<select id="getLikeSub_interestNum" parameterType="string" resultType="int">
+select interestNum from interest where interestName = #{checklist}
+</select>
+
+<select id="getLikeSub_interest_sub"  parameterType="int" resultType="Interest">
+select * from interest_sub where interNum = #{internum}
+</select>
+
+<select id="insertMemberLike_select" resultType="Interest">
+select interNum, interSubNum from interest_sub where interSubName = #{intersubname}
+</select>
+
+<select id="insertMemberLike_insert" parameterType="hashMap">
+insert into memberLike values(memberLike_seq.nextval,#{name}, #{internum}, #{intersubnum})
+</select>
+</mapper>

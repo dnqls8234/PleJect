@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class MyPageDataBean {
+public class MyPageDataBean implements  Serializable{
 
 	private int like_ca;
 	private String meet_title;

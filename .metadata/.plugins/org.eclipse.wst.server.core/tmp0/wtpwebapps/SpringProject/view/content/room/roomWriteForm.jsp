@@ -6,6 +6,13 @@
 <title>Insert title here</title>
 <script>
 	function list(e) {
+		
+			<c:forEach var='li' items='${li }' varStatus='index'>
+			var mode${index.index} = <c:out value='${li.interestName}'/>
+			</c:forEach>
+
+
+		
 		var good_a = [ "지수", "제니", "로제", "리사" ];
 		var good_b = [ "빅토리아", "엠버", "루나", "크리스탈" ];
 		var good_c = [ "LE", "하니", "정화", "혜린", "솔지" ];
@@ -55,32 +62,53 @@
 		// 			target.appendChild(option);
 		// 			alert(d[x]);
 		// 		}
-		target.options.length = 0;
+// 		target.options.length = 0;
 
-		for (x in d) {
-			var option = document.createElement("option");
-			option.value = x;
-			option.innerHTML = d[x];
-			target.appendChild(option);
-		}
+// 		for (x in d) {
+// 			var option = document.createElement("option");
+// 			option.value = x;
+// 			option.innerHTML = d[x];
+// 			alert(option);
+// 			target.appendChild(option);
+// 		}
 
+		
+		
+		
+		    var temp, i=0, j=0;
+		    var ccount, cselect;
+
+		    temp = document.roomform.like_sub;
+
+		    for (i=(temp.options.length-1) ; i>0 ; i--){ temp.options[i] = null; }
+		    eval('ccount = like_sub' + e + '.length');
+		    for (j=0 ; j<ccount ; j++) {
+		        eval('cselect = like_sub' + e + '[' + j + '];');
+		        temp.options[j]= new Option(cselect,cselect); 
+		    }
+		    temp.options[0].selected=true;
 	}
 </script>
 </head>
 <body>
-	<form action="roomWritePro" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="host" value="${member.name }">
-		<input type="hidden" name="email" value="${member.email}">
+
+	<form action="roomWritePro" method="post" enctype="multipart/form-data"
+		name="roomform">
+		<input type="hidden" name="host" value="${member.name }"> <input
+			type="hidden" name="email" value="${member.email}"> <input
+			type="hidden" name="num" value="${rm.num}">
 		<table>
 			<tr>
-				<td><select onchange="list(this)" name="like_ca">
+				<td><select
+					onchange=list(document.roomform.like_ca.options.selectedIndex)
+					name="like_ca">
 						<option>대분류</option>
-								<c:forEach var="li" items="${li }" varStatus="index">
-									<option value="${index.index}" id="">${li.interestName }</option>
-								</c:forEach>
-<!-- 						<option value="1">대분류1</option> -->
-<!-- 						<option value="2">대분류2</option> -->
-<!-- 						<option value="3">대분류3</option> -->
+						<c:forEach var="li" items="${li }" varStatus="index">
+							<option value="${index.index}" id="">${li.interestName }</option>
+						</c:forEach>
+						<!-- 						<option value="1">대분류1</option> -->
+						<!-- 						<option value="2">대분류2</option> -->
+						<!-- 						<option value="3">대분류3</option> -->
 
 
 				</select> <select id="small" name="like_sub" style="display: none">
@@ -88,7 +116,7 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td>메인 사진 : <input type="file" name="photo">
+				<td>메인 사진 : <input type="file" name="uploadfile">
 				</td>
 			</tr>
 			<tr>
@@ -101,7 +129,8 @@
 			</tr>
 
 			<tr>
-				<td>멤버 수 : <input type="number" name="membercnt" max="100" min="2" placeholder="2">
+				<td>멤버 수 : <input type="number" name="membercnt" max="100"
+					min="2" placeholder="2">
 				</td>
 			</tr>
 
@@ -113,7 +142,8 @@
 			<tr>
 				<td><input type="submit" value="모임 등록"></td>
 				<td><input type="reset" value="다시 작성"></td>
-				<td><input type="button"  value="돌아 가기" onclick="javascript:window.location='<%=request.getContextPath()%>/content/main'"></td>
+				<td><input type="button" value="돌아 가기"
+					onclick="javascript:window.location='<%=request.getContextPath()%>/content/main'"></td>
 			</tr>
 		</table>
 

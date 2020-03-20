@@ -318,7 +318,7 @@ function jusoCallBack(roadFullAddr){
 			</div>
 			<div class = "info-group">
 				<div><label for = "name">닉네임</label></div>
-				<div><input type="text" name="username" id="username" placeholder="10자이하" maxlength="10" class="form-control"></div>
+				<div><input type="text" name="name" id="username" placeholder="10자이하" maxlength="10" class="form-control"></div>
 				<div class="eheck_font" id="name_check"></div>
 			</div>
 			<div class = "info-group">
@@ -340,8 +340,8 @@ function jusoCallBack(roadFullAddr){
 			</div>
 			<div class = "row">
 				<div class= "info-group col2">
-					<div><label for = "phoneNumber">휴대전화번호</label></div>
-					<div><input type="text" id="phone-number" name="phoneNumber" placeholder="예) 01012345678" class="form-control input"></div>
+					<div><label for = phone-number>휴대전화번호</label></div>
+					<div><input type="text" id="phone-number" name="phone" placeholder="예) 01012345678" class="form-control input"></div>
 					<div class="eheck_font" id="phone_check"></div>
 				</div>
 			</div>
@@ -359,7 +359,7 @@ function jusoCallBack(roadFullAddr){
 				</div>
 				<div class= "info-group col4">
 					<div><label for = "userAddr">&nbsp;</label></div>
-					<div><input type="text" id="userAddr" name="userAddr" placeholder="주소를 검색하세요." class="form-control" readonly="true"/></div>
+					<div><input type="text" id="userAddr" name="address" placeholder="주소를 검색하세요." class="form-control" readonly="true"/></div>
 					<div class="eheck_font" id="userAddr_check"></div>
 				</div>
 			</div>

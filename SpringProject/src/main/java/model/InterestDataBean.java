@@ -1,6 +1,8 @@
 package model;
 
-public class InterestDataBean {
+import java.io.Serializable;
+
+public class InterestDataBean implements  Serializable {
 	
 	private String interNum; // 관심사cate id
 	private String intersubNum; // 관심사sub id

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.InterestDao;
 import dao.LogonDao;
+import dao.MybatisLogonDaoOracle;
 import model.InterestDataBean;
 import model.LogonDataBean;
 
@@ -22,17 +24,16 @@ import model.LogonDataBean;
 @RequestMapping("/member/")
 public class MemberController{
 	
+	
+	
+	@Autowired
+	MybatisLogonDaoOracle service;
+	
 	@ModelAttribute
 	public void initProcess(HttpServletRequest request) {
 		
 		HttpSession session=request.getSession();
-		
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 		
+		String asdasdsad;
 	}
 	
 	@RequestMapping(value = "loginPro", method = RequestMethod.POST)
@@ -48,7 +49,6 @@ public class MemberController{
 		System.out.println(memEmail);
 		System.out.println(memPassword);
 		int check = manager.userCheck(memEmail, memPassword);
-		
 		if (check == 1) {
 			String name = manager.findName(memEmail);
 			session.setAttribute("name", name);
@@ -71,56 +71,20 @@ public class MemberController{
 	
 	@RequestMapping(value = "signUpForm", method = RequestMethod.GET)
 	public String member_signUpForm(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		HttpSession session = request.getSession();
+		
+		
 		return "member/signUpForm";
 	}
 	
-//	@RequestMapping(value = "signUpPro", method = RequestMethod.POST)
-//	public String member_signUpPro(HttpServletRequest request, HttpServletResponse res) throws Exception {
-//		HttpSession session = request.getSession();
-//		
-//		LogonDataBean member = new LogonDataBean();
-//		LogonDao manager = LogonDao.getInstance();
-//		
-//		String realFolder = "";
-//		String saveFolder = "uploadFile";
-//		String encType = "UTF-8";
-//		int maxSize = 10*1024*1024;
-//		ServletContext context = getServletContext();
-//		realFolder = context.getRealPath(saveFolder);
-//		try {
-//			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
-//			Enumeration files = multi.getFileNames();
-//			if(files.hasMoreElements()) {
-//				System.out.println("──────────────1");
-//				String name = (String)files.nextElement();
-//				System.out.println(name + " ──────────────2");
-//				File file = multi.getFile(name);
-//				System.out.println(file + " ──────────────3");
-//			if (file != null) {
-//				member.setProfileImg(file.getName());
-//			} else {
-//				member.setProfileImg("");
-//			}
-//			}
-//			member.setGender(multi.getParameter("gender"));
-//			member.setName(multi.getParameter("username"));
-//			member.setEmail(multi.getParameter("email"));
-//			member.setPassword(multi.getParameter("password"));
-//			member.setPhone(multi.getParameter("phoneNumber"));
-//			member.setBirthday(multi.getParameter("birthday"));
-//			member.setAddress(multi.getParameter("userAddr"));
-//		
-//			manager.insertMember(member);
-//				
-//		} catch (Exception e ) {
-//			e.printStackTrace();
-//		}
-//		
-//		session.setAttribute("name", member.getName());
-//		
-//	
-//		return "redirect:/memberAction/memberLikeForm";
-//	}
+	@RequestMapping(value = "signUpPro", method = RequestMethod.POST)
+	public String member_signUpPro(LogonDataBean logon){
+		
+		System.out.println(logon);
+		logon.setProfileImg("null");
+		service.insertMember(logon);
+		
+		
+		return "redirect:/memberAction/memberLikeForm";
+	}
 
 }

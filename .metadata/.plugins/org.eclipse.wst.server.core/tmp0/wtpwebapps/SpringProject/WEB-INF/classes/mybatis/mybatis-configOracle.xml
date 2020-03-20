@@ -22,5 +22,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="mybatis/RoomOracle.xml" />
+		<mapper resource="mybatis/InterestOracle.xml" />
+		<mapper resource="mybatis/LogonOracle.xml" />
 	</mappers>
 </configuration>

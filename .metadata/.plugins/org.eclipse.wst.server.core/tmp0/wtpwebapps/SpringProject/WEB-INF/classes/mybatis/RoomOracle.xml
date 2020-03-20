@@ -12,7 +12,7 @@ select nvl(max(num)+1,1) from hobbyclass
  insert into hobbyclass values(#{num},#{like_ca},#{like_sub},#{meet_title},#{photo},#{content},#{host},#{membercnt},#{location}) 
 </insert>	
 
-<select id="getArticleList"  resultType="List">
+<select id="getArticleList"  resultType="Room">
 select * from hobbyclass
 </select>
 

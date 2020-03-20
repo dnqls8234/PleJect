@@ -1,0 +1,16 @@
+테이블 전체 조회
+select * from all_tables;
+
+인덱스 전체 조회
+select * from all_indexs;
+
+프로시저 전체 조회
+desc dbms_stats
+
+스칼라 서브쿼리 (주쿼리) select 절에 사용, 주 쿼리에서 추출되는 데이터 건수만큼 반복, 조건절에 무조건 인덱스 생성 (where a.empid=b.empid), 가장 바깥쪽에서 실행해야 성능도 좋아짐
+
+인라인뷰 from 절에 사용
+
+서브쿼리 where 절에 사용
+
+페이징 쿼리

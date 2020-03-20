@@ -10,7 +10,9 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven />
+	
 	<context:component-scan base-package="controller, serivce" />
+	
 	<mvc:default-servlet-handler />
 
 
@@ -21,17 +23,25 @@
 	</bean>
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-		<property name="maxUploadSize" value="100000000" /> 
-		<property name="maxInMemorySize" value="100000000" /> 
+<!-- 		<property name="maxUploadSize" value="100000000" />  -->
+<!-- 		<property name="maxInMemorySize" value="100000000" />  -->
+		<property name="defaultEncoding" value="utf-8"/>
 	</bean> 
 	
-	<bean id="uploadPath" class="java.lang.String">
-        <constructor-arg value="C:\\Users\\SIST82\\Desktop\\Project\\SpringProject\\src\\main\\webapp\\uploadFile"/>
-    </bean>
-
+<!-- 	<bean id="uploadPath" class="java.lang.String"> -->
+<!--         <constructor-arg value="C:\\Users\\SIST82\\Desktop\\Project\\SpringProject\\src\\main\\webapp\\uploadFile"/> -->
+<!--     </bean> -->
 
 
 	<bean class="dao.RoomDaoMybatis">
+		<property name="dbname" value="Oracle" />
+	</bean>
+	
+	<bean class="dao.MybatisInterestDaoOracle">
+		<property name="dbname" value="Oracle" />
+	</bean>
+	
+	<bean class="dao.MybatisLogonDaoOracle">
 		<property name="dbname" value="Oracle" />
 	</bean>
 
